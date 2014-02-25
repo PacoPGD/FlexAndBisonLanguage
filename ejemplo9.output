@@ -1,0 +1,1752 @@
+Terminales no usados en gramática
+
+   INDEFINIDA
+
+
+Estado 87 conflictos: 1 desplazamiento(s)/reducción(ones)
+
+
+Gramática
+
+    0 $accept: list $end
+
+    1 list: /* vacío */
+    2     | list stmt ';'
+    3     | list error ';'
+
+    4 stmt: /* vacío */
+    5     | asgn
+    6     | ESCRIBIR expr
+    7     | LEER '(' VAR ')'
+    8     | mientras cond stmt end
+    9     | si cond stmt end
+   10     | si cond stmt end SI_NO stmt end
+   11     | '{' stmtlist '}'
+
+   12 asgn: VAR ASIGNACION expr
+   13     | CONSTANTE ASIGNACION expr
+
+   14 cond: '(' expr ')'
+
+   15 mientras: MIENTRAS
+
+   16 si: SI
+
+   17 end: /* vacío */
+
+   18 stmtlist: /* vacío */
+   19         | stmtlist stmt ';'
+
+   20 expr: NUMBER
+   21     | VAR
+   22     | CONSTANTE
+   23     | asgn
+   24     | FUNCION0_PREDEFINIDA '(' ')'
+   25     | FUNCION1_PREDEFINIDA '(' expr ')'
+   26     | FUNCION2_PREDEFINIDA '(' expr ',' expr ')'
+   27     | '(' expr ')'
+   28     | expr '+' expr
+   29     | expr '-' expr
+   30     | expr '*' expr
+   31     | expr '/' expr
+   32     | expr '%' expr
+   33     | expr '^' expr
+   34     | '-' expr
+   35     | '+' expr
+   36     | expr MAYOR_QUE expr
+   37     | expr MAYOR_IGUAL expr
+   38     | expr MENOR_QUE expr
+   39     | expr MENOR_IGUAL expr
+   40     | expr IGUAL expr
+   41     | expr DISTINTO expr
+   42     | expr Y_LOGICO expr
+   43     | expr O_LOGICO expr
+   44     | NEGACION expr
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+'%' (37) 32
+'(' (40) 7 14 24 25 26 27
+')' (41) 7 14 24 25 26 27
+'*' (42) 30
+'+' (43) 28 35
+',' (44) 26
+'-' (45) 29 34
+'/' (47) 31
+';' (59) 2 3 19
+'^' (94) 33
+'{' (123) 11
+'}' (125) 11
+error (256) 3
+NUMBER (258) 20
+VAR (259) 7 12 21
+CONSTANTE (260) 13 22
+FUNCION0_PREDEFINIDA (261) 24
+FUNCION1_PREDEFINIDA (262) 25
+FUNCION2_PREDEFINIDA (263) 26
+INDEFINIDA (264)
+ESCRIBIR (265) 6
+MIENTRAS (266) 15
+SI_NO (267) 10
+LEER (268) 7
+SI (269) 16
+ASIGNACION (270) 12 13
+O_LOGICO (271) 43
+Y_LOGICO (272) 42
+IGUAL (273) 40
+DISTINTO (274) 41
+MAYOR_IGUAL (275) 37
+MENOR_IGUAL (276) 39
+MENOR_QUE (277) 38
+MAYOR_QUE (278) 36
+NEGACION (279) 44
+UNARIO (280)
+
+
+No terminales con las reglas donde aparecen
+
+$accept (38)
+    en la izquierda: 0
+list (39)
+    en la izquierda: 1 2 3, en la derecha: 0 2 3
+stmt (40)
+    en la izquierda: 4 5 6 7 8 9 10 11, en la derecha: 2 8 9 10 19
+asgn (41)
+    en la izquierda: 12 13, en la derecha: 5 23
+cond (42)
+    en la izquierda: 14, en la derecha: 8 9 10
+mientras (43)
+    en la izquierda: 15, en la derecha: 8
+si (44)
+    en la izquierda: 16, en la derecha: 9 10
+end (45)
+    en la izquierda: 17, en la derecha: 8 9 10
+stmtlist (46)
+    en la izquierda: 18 19, en la derecha: 11 19
+expr (47)
+    en la izquierda: 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+    36 37 38 39 40 41 42 43 44, en la derecha: 6 12 13 14 25 26 27
+    28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44
+
+
+estado 0
+
+    0 $accept: . list $end
+
+    $default  reduce usando la regla 1 (list)
+
+    list  ir al estado 1
+
+
+estado 1
+
+    0 $accept: list . $end
+    2 list: list . stmt ';'
+    3     | list . error ';'
+
+    $end       desplazar e ir al estado 2
+    error      desplazar e ir al estado 3
+    VAR        desplazar e ir al estado 4
+    CONSTANTE  desplazar e ir al estado 5
+    ESCRIBIR   desplazar e ir al estado 6
+    MIENTRAS   desplazar e ir al estado 7
+    LEER       desplazar e ir al estado 8
+    SI         desplazar e ir al estado 9
+    '{'        desplazar e ir al estado 10
+
+    ';'  reduce usando la regla 4 (stmt)
+
+    stmt      ir al estado 11
+    asgn      ir al estado 12
+    mientras  ir al estado 13
+    si        ir al estado 14
+
+
+estado 2
+
+    0 $accept: list $end .
+
+    $default  aceptar
+
+
+estado 3
+
+    3 list: list error . ';'
+
+    ';'  desplazar e ir al estado 15
+
+
+estado 4
+
+   12 asgn: VAR . ASIGNACION expr
+
+    ASIGNACION  desplazar e ir al estado 16
+
+
+estado 5
+
+   13 asgn: CONSTANTE . ASIGNACION expr
+
+    ASIGNACION  desplazar e ir al estado 17
+
+
+estado 6
+
+    6 stmt: ESCRIBIR . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 29
+
+
+estado 7
+
+   15 mientras: MIENTRAS .
+
+    $default  reduce usando la regla 15 (mientras)
+
+
+estado 8
+
+    7 stmt: LEER . '(' VAR ')'
+
+    '('  desplazar e ir al estado 30
+
+
+estado 9
+
+   16 si: SI .
+
+    $default  reduce usando la regla 16 (si)
+
+
+estado 10
+
+   11 stmt: '{' . stmtlist '}'
+
+    $default  reduce usando la regla 18 (stmtlist)
+
+    stmtlist  ir al estado 31
+
+
+estado 11
+
+    2 list: list stmt . ';'
+
+    ';'  desplazar e ir al estado 32
+
+
+estado 12
+
+    5 stmt: asgn .
+
+    $default  reduce usando la regla 5 (stmt)
+
+
+estado 13
+
+    8 stmt: mientras . cond stmt end
+
+    '('  desplazar e ir al estado 33
+
+    cond  ir al estado 34
+
+
+estado 14
+
+    9 stmt: si . cond stmt end
+   10     | si . cond stmt end SI_NO stmt end
+
+    '('  desplazar e ir al estado 33
+
+    cond  ir al estado 35
+
+
+estado 15
+
+    3 list: list error ';' .
+
+    $default  reduce usando la regla 3 (list)
+
+
+estado 16
+
+   12 asgn: VAR ASIGNACION . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 36
+
+
+estado 17
+
+   13 asgn: CONSTANTE ASIGNACION . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 37
+
+
+estado 18
+
+   20 expr: NUMBER .
+
+    $default  reduce usando la regla 20 (expr)
+
+
+estado 19
+
+   12 asgn: VAR . ASIGNACION expr
+   21 expr: VAR .
+
+    ASIGNACION  desplazar e ir al estado 16
+
+    $default  reduce usando la regla 21 (expr)
+
+
+estado 20
+
+   13 asgn: CONSTANTE . ASIGNACION expr
+   22 expr: CONSTANTE .
+
+    ASIGNACION  desplazar e ir al estado 17
+
+    $default  reduce usando la regla 22 (expr)
+
+
+estado 21
+
+   24 expr: FUNCION0_PREDEFINIDA . '(' ')'
+
+    '('  desplazar e ir al estado 38
+
+
+estado 22
+
+   25 expr: FUNCION1_PREDEFINIDA . '(' expr ')'
+
+    '('  desplazar e ir al estado 39
+
+
+estado 23
+
+   26 expr: FUNCION2_PREDEFINIDA . '(' expr ',' expr ')'
+
+    '('  desplazar e ir al estado 40
+
+
+estado 24
+
+   35 expr: '+' . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 41
+
+
+estado 25
+
+   34 expr: '-' . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 42
+
+
+estado 26
+
+   44 expr: NEGACION . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 43
+
+
+estado 27
+
+   27 expr: '(' . expr ')'
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 44
+
+
+estado 28
+
+   23 expr: asgn .
+
+    $default  reduce usando la regla 23 (expr)
+
+
+estado 29
+
+    6 stmt: ESCRIBIR expr .
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    O_LOGICO     desplazar e ir al estado 45
+    Y_LOGICO     desplazar e ir al estado 46
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+
+    $default  reduce usando la regla 6 (stmt)
+
+
+estado 30
+
+    7 stmt: LEER '(' . VAR ')'
+
+    VAR  desplazar e ir al estado 59
+
+
+estado 31
+
+   11 stmt: '{' stmtlist . '}'
+   19 stmtlist: stmtlist . stmt ';'
+
+    VAR        desplazar e ir al estado 4
+    CONSTANTE  desplazar e ir al estado 5
+    ESCRIBIR   desplazar e ir al estado 6
+    MIENTRAS   desplazar e ir al estado 7
+    LEER       desplazar e ir al estado 8
+    SI         desplazar e ir al estado 9
+    '{'        desplazar e ir al estado 10
+    '}'        desplazar e ir al estado 60
+
+    $default  reduce usando la regla 4 (stmt)
+
+    stmt      ir al estado 61
+    asgn      ir al estado 12
+    mientras  ir al estado 13
+    si        ir al estado 14
+
+
+estado 32
+
+    2 list: list stmt ';' .
+
+    $default  reduce usando la regla 2 (list)
+
+
+estado 33
+
+   14 cond: '(' . expr ')'
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 62
+
+
+estado 34
+
+    8 stmt: mientras cond . stmt end
+
+    VAR        desplazar e ir al estado 4
+    CONSTANTE  desplazar e ir al estado 5
+    ESCRIBIR   desplazar e ir al estado 6
+    MIENTRAS   desplazar e ir al estado 7
+    LEER       desplazar e ir al estado 8
+    SI         desplazar e ir al estado 9
+    '{'        desplazar e ir al estado 10
+
+    $default  reduce usando la regla 4 (stmt)
+
+    stmt      ir al estado 63
+    asgn      ir al estado 12
+    mientras  ir al estado 13
+    si        ir al estado 14
+
+
+estado 35
+
+    9 stmt: si cond . stmt end
+   10     | si cond . stmt end SI_NO stmt end
+
+    VAR        desplazar e ir al estado 4
+    CONSTANTE  desplazar e ir al estado 5
+    ESCRIBIR   desplazar e ir al estado 6
+    MIENTRAS   desplazar e ir al estado 7
+    LEER       desplazar e ir al estado 8
+    SI         desplazar e ir al estado 9
+    '{'        desplazar e ir al estado 10
+
+    $default  reduce usando la regla 4 (stmt)
+
+    stmt      ir al estado 64
+    asgn      ir al estado 12
+    mientras  ir al estado 13
+    si        ir al estado 14
+
+
+estado 36
+
+   12 asgn: VAR ASIGNACION expr .
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    O_LOGICO     desplazar e ir al estado 45
+    Y_LOGICO     desplazar e ir al estado 46
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+
+    $default  reduce usando la regla 12 (asgn)
+
+
+estado 37
+
+   13 asgn: CONSTANTE ASIGNACION expr .
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    O_LOGICO     desplazar e ir al estado 45
+    Y_LOGICO     desplazar e ir al estado 46
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+
+    $default  reduce usando la regla 13 (asgn)
+
+
+estado 38
+
+   24 expr: FUNCION0_PREDEFINIDA '(' . ')'
+
+    ')'  desplazar e ir al estado 65
+
+
+estado 39
+
+   25 expr: FUNCION1_PREDEFINIDA '(' . expr ')'
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 66
+
+
+estado 40
+
+   26 expr: FUNCION2_PREDEFINIDA '(' . expr ',' expr ')'
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 67
+
+
+estado 41
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   35     | '+' expr .
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 35 (expr)
+
+
+estado 42
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   34     | '-' expr .
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 34 (expr)
+
+
+estado 43
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+   44     | NEGACION expr .
+
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 44 (expr)
+
+
+estado 44
+
+   27 expr: '(' expr . ')'
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    O_LOGICO     desplazar e ir al estado 45
+    Y_LOGICO     desplazar e ir al estado 46
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+    ')'          desplazar e ir al estado 68
+
+
+estado 45
+
+   43 expr: expr O_LOGICO . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 69
+
+
+estado 46
+
+   42 expr: expr Y_LOGICO . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 70
+
+
+estado 47
+
+   40 expr: expr IGUAL . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 71
+
+
+estado 48
+
+   41 expr: expr DISTINTO . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 72
+
+
+estado 49
+
+   37 expr: expr MAYOR_IGUAL . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 73
+
+
+estado 50
+
+   39 expr: expr MENOR_IGUAL . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 74
+
+
+estado 51
+
+   38 expr: expr MENOR_QUE . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 75
+
+
+estado 52
+
+   36 expr: expr MAYOR_QUE . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 76
+
+
+estado 53
+
+   28 expr: expr '+' . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 77
+
+
+estado 54
+
+   29 expr: expr '-' . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 78
+
+
+estado 55
+
+   30 expr: expr '*' . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 79
+
+
+estado 56
+
+   31 expr: expr '/' . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 80
+
+
+estado 57
+
+   32 expr: expr '%' . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 81
+
+
+estado 58
+
+   33 expr: expr '^' . expr
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 82
+
+
+estado 59
+
+    7 stmt: LEER '(' VAR . ')'
+
+    ')'  desplazar e ir al estado 83
+
+
+estado 60
+
+   11 stmt: '{' stmtlist '}' .
+
+    $default  reduce usando la regla 11 (stmt)
+
+
+estado 61
+
+   19 stmtlist: stmtlist stmt . ';'
+
+    ';'  desplazar e ir al estado 84
+
+
+estado 62
+
+   14 cond: '(' expr . ')'
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    O_LOGICO     desplazar e ir al estado 45
+    Y_LOGICO     desplazar e ir al estado 46
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+    ')'          desplazar e ir al estado 85
+
+
+estado 63
+
+    8 stmt: mientras cond stmt . end
+
+    $default  reduce usando la regla 17 (end)
+
+    end  ir al estado 86
+
+
+estado 64
+
+    9 stmt: si cond stmt . end
+   10     | si cond stmt . end SI_NO stmt end
+
+    $default  reduce usando la regla 17 (end)
+
+    end  ir al estado 87
+
+
+estado 65
+
+   24 expr: FUNCION0_PREDEFINIDA '(' ')' .
+
+    $default  reduce usando la regla 24 (expr)
+
+
+estado 66
+
+   25 expr: FUNCION1_PREDEFINIDA '(' expr . ')'
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    O_LOGICO     desplazar e ir al estado 45
+    Y_LOGICO     desplazar e ir al estado 46
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+    ')'          desplazar e ir al estado 88
+
+
+estado 67
+
+   26 expr: FUNCION2_PREDEFINIDA '(' expr . ',' expr ')'
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    O_LOGICO     desplazar e ir al estado 45
+    Y_LOGICO     desplazar e ir al estado 46
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+    ','          desplazar e ir al estado 89
+
+
+estado 68
+
+   27 expr: '(' expr ')' .
+
+    $default  reduce usando la regla 27 (expr)
+
+
+estado 69
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+   43     | expr O_LOGICO expr .
+
+    Y_LOGICO     desplazar e ir al estado 46
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+
+    $default  reduce usando la regla 43 (expr)
+
+
+estado 70
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   42     | expr Y_LOGICO expr .
+   43     | expr . O_LOGICO expr
+
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+
+    $default  reduce usando la regla 42 (expr)
+
+
+estado 71
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   40     | expr IGUAL expr .
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '+'  desplazar e ir al estado 53
+    '-'  desplazar e ir al estado 54
+    '*'  desplazar e ir al estado 55
+    '/'  desplazar e ir al estado 56
+    '%'  desplazar e ir al estado 57
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 40 (expr)
+
+
+estado 72
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   41     | expr DISTINTO expr .
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '+'  desplazar e ir al estado 53
+    '-'  desplazar e ir al estado 54
+    '*'  desplazar e ir al estado 55
+    '/'  desplazar e ir al estado 56
+    '%'  desplazar e ir al estado 57
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 41 (expr)
+
+
+estado 73
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   37     | expr MAYOR_IGUAL expr .
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '+'  desplazar e ir al estado 53
+    '-'  desplazar e ir al estado 54
+    '*'  desplazar e ir al estado 55
+    '/'  desplazar e ir al estado 56
+    '%'  desplazar e ir al estado 57
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 37 (expr)
+
+
+estado 74
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   39     | expr MENOR_IGUAL expr .
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '+'  desplazar e ir al estado 53
+    '-'  desplazar e ir al estado 54
+    '*'  desplazar e ir al estado 55
+    '/'  desplazar e ir al estado 56
+    '%'  desplazar e ir al estado 57
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 39 (expr)
+
+
+estado 75
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   38     | expr MENOR_QUE expr .
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '+'  desplazar e ir al estado 53
+    '-'  desplazar e ir al estado 54
+    '*'  desplazar e ir al estado 55
+    '/'  desplazar e ir al estado 56
+    '%'  desplazar e ir al estado 57
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 38 (expr)
+
+
+estado 76
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   36     | expr MAYOR_QUE expr .
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '+'  desplazar e ir al estado 53
+    '-'  desplazar e ir al estado 54
+    '*'  desplazar e ir al estado 55
+    '/'  desplazar e ir al estado 56
+    '%'  desplazar e ir al estado 57
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 36 (expr)
+
+
+estado 77
+
+   28 expr: expr . '+' expr
+   28     | expr '+' expr .
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '*'  desplazar e ir al estado 55
+    '/'  desplazar e ir al estado 56
+    '%'  desplazar e ir al estado 57
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 28 (expr)
+
+
+estado 78
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   29     | expr '-' expr .
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '*'  desplazar e ir al estado 55
+    '/'  desplazar e ir al estado 56
+    '%'  desplazar e ir al estado 57
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 29 (expr)
+
+
+estado 79
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   30     | expr '*' expr .
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 30 (expr)
+
+
+estado 80
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   31     | expr '/' expr .
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 31 (expr)
+
+
+estado 81
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   32     | expr '%' expr .
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 32 (expr)
+
+
+estado 82
+
+   28 expr: expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   33     | expr '^' expr .
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    '^'  desplazar e ir al estado 58
+
+    $default  reduce usando la regla 33 (expr)
+
+
+estado 83
+
+    7 stmt: LEER '(' VAR ')' .
+
+    $default  reduce usando la regla 7 (stmt)
+
+
+estado 84
+
+   19 stmtlist: stmtlist stmt ';' .
+
+    $default  reduce usando la regla 19 (stmtlist)
+
+
+estado 85
+
+   14 cond: '(' expr ')' .
+
+    $default  reduce usando la regla 14 (cond)
+
+
+estado 86
+
+    8 stmt: mientras cond stmt end .
+
+    $default  reduce usando la regla 8 (stmt)
+
+
+estado 87
+
+    9 stmt: si cond stmt end .
+   10     | si cond stmt end . SI_NO stmt end
+
+    SI_NO  desplazar e ir al estado 90
+
+    SI_NO     [reduce usando la regla 9 (stmt)]
+    $default  reduce usando la regla 9 (stmt)
+
+
+estado 88
+
+   25 expr: FUNCION1_PREDEFINIDA '(' expr ')' .
+
+    $default  reduce usando la regla 25 (expr)
+
+
+estado 89
+
+   26 expr: FUNCION2_PREDEFINIDA '(' expr ',' . expr ')'
+
+    NUMBER                desplazar e ir al estado 18
+    VAR                   desplazar e ir al estado 19
+    CONSTANTE             desplazar e ir al estado 20
+    FUNCION0_PREDEFINIDA  desplazar e ir al estado 21
+    FUNCION1_PREDEFINIDA  desplazar e ir al estado 22
+    FUNCION2_PREDEFINIDA  desplazar e ir al estado 23
+    '+'                   desplazar e ir al estado 24
+    '-'                   desplazar e ir al estado 25
+    NEGACION              desplazar e ir al estado 26
+    '('                   desplazar e ir al estado 27
+
+    asgn  ir al estado 28
+    expr  ir al estado 91
+
+
+estado 90
+
+   10 stmt: si cond stmt end SI_NO . stmt end
+
+    VAR        desplazar e ir al estado 4
+    CONSTANTE  desplazar e ir al estado 5
+    ESCRIBIR   desplazar e ir al estado 6
+    MIENTRAS   desplazar e ir al estado 7
+    LEER       desplazar e ir al estado 8
+    SI         desplazar e ir al estado 9
+    '{'        desplazar e ir al estado 10
+
+    $default  reduce usando la regla 4 (stmt)
+
+    stmt      ir al estado 92
+    asgn      ir al estado 12
+    mientras  ir al estado 13
+    si        ir al estado 14
+
+
+estado 91
+
+   26 expr: FUNCION2_PREDEFINIDA '(' expr ',' expr . ')'
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | expr . '^' expr
+   36     | expr . MAYOR_QUE expr
+   37     | expr . MAYOR_IGUAL expr
+   38     | expr . MENOR_QUE expr
+   39     | expr . MENOR_IGUAL expr
+   40     | expr . IGUAL expr
+   41     | expr . DISTINTO expr
+   42     | expr . Y_LOGICO expr
+   43     | expr . O_LOGICO expr
+
+    O_LOGICO     desplazar e ir al estado 45
+    Y_LOGICO     desplazar e ir al estado 46
+    IGUAL        desplazar e ir al estado 47
+    DISTINTO     desplazar e ir al estado 48
+    MAYOR_IGUAL  desplazar e ir al estado 49
+    MENOR_IGUAL  desplazar e ir al estado 50
+    MENOR_QUE    desplazar e ir al estado 51
+    MAYOR_QUE    desplazar e ir al estado 52
+    '+'          desplazar e ir al estado 53
+    '-'          desplazar e ir al estado 54
+    '*'          desplazar e ir al estado 55
+    '/'          desplazar e ir al estado 56
+    '%'          desplazar e ir al estado 57
+    '^'          desplazar e ir al estado 58
+    ')'          desplazar e ir al estado 93
+
+
+estado 92
+
+   10 stmt: si cond stmt end SI_NO stmt . end
+
+    $default  reduce usando la regla 17 (end)
+
+    end  ir al estado 94
+
+
+estado 93
+
+   26 expr: FUNCION2_PREDEFINIDA '(' expr ',' expr ')' .
+
+    $default  reduce usando la regla 26 (expr)
+
+
+estado 94
+
+   10 stmt: si cond stmt end SI_NO stmt end .
+
+    $default  reduce usando la regla 10 (stmt)

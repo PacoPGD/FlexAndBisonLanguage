@@ -1,0 +1,4 @@
+leer(dato);
+si(dato<10){
+leer(dato);
+};
